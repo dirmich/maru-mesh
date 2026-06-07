@@ -36,6 +36,24 @@ make release-assets
 
 The Windows server binary is created at `bin/windows-amd64/marumesh-server.exe`. `make release-assets` creates GitHub Release upload files under `dist/`. macOS builds must be produced natively because of the systray dependency. Intel Macs use `darwin-amd64`; Apple Silicon Macs (M1/M2/M3/M4) use `darwin-arm64`.
 
+## Publish
+
+After source changes are committed, run:
+
+```bash
+./publish.sh
+```
+
+`publish.sh` reads `VERSION` from `Makefile`, runs tests and release builds, uploads `dist/marumesh-*` assets to the public release repository, and syncs public documentation into `../marumesh-pub`. All top-level `README*.md` files are synced, so additional language files such as `README-ja.md` can be added without changing the publish flow.
+
+Useful overrides:
+
+```bash
+PUBLIC_REPO=dirmich/maru-mesh PUBLIC_REPO_DIR=../marumesh-pub ./publish.sh
+./publish.sh --skip-tests --skip-build
+./publish.sh --dry-run
+```
+
 ## Verify
 
 ```bash

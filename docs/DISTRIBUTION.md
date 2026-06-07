@@ -17,6 +17,30 @@ curl -fsSL https://marumesh.lab.highmaru.com/install.sh | sh
 iwr https://marumesh.lab.highmaru.com/install.ps1 -UseB | iex
 ```
 
+## Publish 절차
+
+소스와 원본 문서는 private source repo에서 관리하고, 공개 README/docs와 client release asset은 public repo `dirmich/maru-mesh`로 배포합니다. 수정이 끝나고 source commit이 완료된 상태에서 다음 명령을 실행합니다.
+
+```bash
+./publish.sh
+```
+
+기본 동작:
+
+- `Makefile`의 `VERSION`을 읽어 release tag `v<VERSION>`을 결정합니다.
+- `make test`와 `make release-assets`를 실행합니다.
+- `dist/marumesh-*` asset을 public GitHub Release에 생성 또는 덮어쓰기 업로드합니다.
+- 최상위 `README*.md` 파일과 `docs/`를 `../marumesh-pub`에 동기화하고 commit/push합니다.
+- `README-ko.md`, `README-ja.md`처럼 언어별 README가 추가되어도 `README*.md` 패턴으로 자동 동기화됩니다.
+
+환경별 override:
+
+```bash
+PUBLIC_REPO=dirmich/maru-mesh PUBLIC_REPO_DIR=../marumesh-pub ./publish.sh
+./publish.sh --skip-tests --skip-build
+./publish.sh --dry-run
+```
+
 ---
 
 ## 펭귄 (Linux & Raspberry Pi)
