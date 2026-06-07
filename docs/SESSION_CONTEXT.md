@@ -2,6 +2,8 @@
 
 이 문서는 새로운 AI 에이전트 세션이 시작될 때 현재 프로젝트의 상태와 작업 규칙을 즉시 동기화하기 위해 작성되었습니다.
 
+새로운 기기나 새 세션에서 작업을 시작할 때는 먼저 `docs/ONBOARDING.md`를 읽고, 이 문서는 상세 구현 이력 확인용으로 사용합니다.
+
 ## 📌 현재 프로젝트 상태
 - **현재 버전**: `0.11.63`
 - **주요 구현 완료 사항**:
@@ -70,6 +72,7 @@
     - **CLI SSO 중복 로그인 방지**: 새 SSO token을 받은 직후 device를 선등록해 백그라운드 agent가 같은 실행에서 SSO 로그인 페이지를 다시 열지 않도록 개선.
     - **macOS/Windows tray menu 보강**: `marumesh up` 기본 실행에서 macOS menubar를 표시하고 Windows tray도 유사 메뉴를 제공하며, Close 시 VPN/TUN cleanup 및 tray 종료를 수행하고 로그인 사용자/소유/공유 device 목록을 표시.
     - **Public 배포 repo 분리**: 원본 소스는 private repo에서 관리하고, 문서/Release asset은 public repo `dirmich/maru-mesh`에 동기화.
+    - **새 세션 온보딩 문서 추가**: `docs/ONBOARDING.md`에 저장소 경계, 기본 제품 결정사항, publish 절차, 자주 깨지는 경계를 정리.
 
 ## 🛠️ 개발 및 배포 규칙 (필수 준수)
 1. **언어**: 모든 소통과 문서는 **한국어**를 기본으로 함.

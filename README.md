@@ -188,4 +188,5 @@ JWT_SECRET=...
 - `frontend`: React dashboard source
 - `docs`: PRD, install guides, and feature docs
 
+New development sessions should start with [docs/ONBOARDING.md](docs/ONBOARDING.md).
 For command details, see [docs/commands.md](docs/commands.md). For deployment details, see [docs/install_guide.md](docs/install_guide.md) and [docs/DISTRIBUTION.md](docs/DISTRIBUTION.md).

@@ -188,4 +188,5 @@ JWT_SECRET=...
 - `frontend`: React 대시보드 소스
 - `docs`: PRD, 설치 가이드, 기능 문서
 
+새로운 기기나 세션에서 작업을 시작할 때는 [docs/ONBOARDING.md](docs/ONBOARDING.md)를 먼저 읽으세요.
 더 자세한 명령어는 [docs/commands.md](docs/commands.md), 배포 방법은 [docs/install_guide.md](docs/install_guide.md)와 [docs/DISTRIBUTION.md](docs/DISTRIBUTION.md)를 참고하세요.
