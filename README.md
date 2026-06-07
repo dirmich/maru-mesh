@@ -137,12 +137,19 @@ C:\MaruMesh\marumesh.exe down
 C:\MaruMesh\marumesh.exe uninstall-service
 ```
 
+Check the installed version and upgrade to the latest public release:
+
+```bash
+marumesh version
+marumesh upgrade
+```
+
 On Windows, `up` passes the config path that contains the login token to the service command.
 Use `--control https://mesh.example.com` only when connecting to a different control plane.
 `marumesh up` starts the secure channel in the background and returns. Use `marumesh run` only when you want a foreground daemon process, or `marumesh up --debug` when you need detailed foreground diagnostics.
 In `tun` mode, the virtual interface is configured with the assigned virtual IP before `up` returns. On macOS the interface appears as `utunN` in `ifconfig`.
 The default virtual IP allocation range is `100.64.0.0/24`. Operators can change it with `MARUMESH_VIRTUAL_CIDR` on the control plane when it overlaps an existing network.
-MaruMesh includes MagicDNS for the `.maru` zone and a hosts fallback for short names. Peer names are published locally as `dev`, `dev.maru`, and `<device-id>.maru` when the agent has OS resolver or hosts permissions.
+MaruMesh includes MagicDNS for the `.maru` zone and a hosts fallback for short names. Peer names are published locally as `dev`, `dev.maru`, and `<device-id>.maru` when the agent has OS resolver or hosts permissions. Device names are unique per owner after DNS normalization, so `Dev Mac` and `dev-mac` cannot be registered for the same owner.
 On macOS, `marumesh up` shows the menubar tray by default. Use `--headless` to run without the tray. Linux defaults to headless mode. Windows uses a tray menu when the desktop service/session supports it.
 
 Create a local TCP proxy to a remote device service:

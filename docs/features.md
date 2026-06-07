@@ -19,6 +19,8 @@
 - **Virtual IP 대역 설정**: 기본 device 가상 IP 대역은 `100.64.0.0/24`이며, `MARUMESH_VIRTUAL_CIDR`로 운영 환경의 기존 대역과 겹치지 않게 변경할 수 있습니다.
 - **Device 이름 보존**: 기존 device 재등록 시 hostname을 자동 덮어쓰지 않고, 이름 변경은 dashboard/API 수정 경로로만 수행합니다.
 - **내장 MagicDNS**: `.maru` zone을 agent 내장 DNS resolver로 처리하고, short name은 hosts fallback으로 보강해 `dev`, `dev.maru`, `<device-id>.maru` 형태의 이름 접근을 지원합니다.
+- **MagicDNS 이름 충돌 방지**: 같은 owner 안에서는 DNS 정규화된 device 이름이 중복되지 않도록 등록/수정 시점에 차단합니다.
+- **CLI version/upgrade**: `marumesh version`으로 현재 binary 버전을 확인하고, `marumesh upgrade`로 public GitHub installer를 통해 최신 release로 갱신합니다.
 - **Tailscale 비교 문서**: `docs/vs_tailscale.md`에 MaruMesh 목표 UX와 Tailscale의 같은 점/다른 점을 정리했습니다.
 - **Tailscale parity backlog**: `docs/tailscale_parity.md`에 완전 대체를 위한 기능 목록과 구현 우선순위를 정리했습니다.
 - **up 기본 control URL 고정**: 기존 config에 localhost가 남아 있어도 `marumesh up`은 `--control`이 없으면 공식 기본 서버를 사용합니다.

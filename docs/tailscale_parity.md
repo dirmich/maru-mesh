@@ -6,6 +6,7 @@ MaruMesh의 장기 목표는 Tailscale과 같은 사용자 경험을 자체 cont
 
 - 기본 UX는 `marumesh up` 하나로 SSO 로그인, device 등록, MagicDNS, 보안 채널 연결까지 끝나야 합니다.
 - source와 control plane은 자체 운영 가능해야 하며, public repo는 installer, release, 사용자 문서만 제공합니다.
+- `marumesh version`과 `marumesh upgrade`로 설치된 binary 버전 확인과 public release 기반 업그레이드를 표준화합니다.
 - Tailscale 기능 parity를 목표로 하되, MaruMesh의 강점은 self-hosted 운영, SSO device lifecycle, DNS inventory, 자체 audit에 둡니다.
 
 ## 기능 parity 항목
@@ -45,6 +46,7 @@ MaruMesh의 장기 목표는 Tailscale과 같은 사용자 경험을 자체 cont
 - agent 내장 DNS resolver가 peer record를 관리합니다.
 - macOS는 `/etc/resolver/maru`, Linux는 `systemd-resolved`를 통해 `.maru` zone을 MaruMesh DNS로 보낼 수 있습니다.
 - short name은 hosts fallback으로 보강합니다.
+- 같은 owner 안에서는 DNS 정규화된 device 이름 충돌을 등록/수정 API에서 차단합니다.
 - Windows OS resolver 통합, split DNS, 이름 충돌 UI는 보강이 필요합니다.
 
 ### 3. Data plane과 relay fallback
@@ -184,4 +186,3 @@ MaruMesh 차별화 방향:
 ## 문서 기준
 
 Tailscale 기능은 계속 확장되므로, parity 문서는 주기적으로 공식 문서를 기준으로 갱신해야 합니다. 구현 전에 해당 기능의 현재 Tailscale 동작을 다시 확인하고 MaruMesh의 self-hosted 운영 모델에 맞춰 설계합니다.
-

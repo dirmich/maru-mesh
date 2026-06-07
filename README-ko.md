@@ -137,12 +137,19 @@ C:\MaruMesh\marumesh.exe down
 C:\MaruMesh\marumesh.exe uninstall-service
 ```
 
+설치된 버전을 확인하고 public 최신 release로 업그레이드:
+
+```bash
+marumesh version
+marumesh upgrade
+```
+
 Windows의 `up`은 로그인 토큰이 저장된 config 경로를 서비스 실행 명령에 명시합니다.
 기본 서버가 아닌 다른 control plane에 연결할 때만 `--control https://mesh.example.com`을 추가합니다.
 `marumesh up`은 보안 채널을 백그라운드로 시작하고 명령은 바로 종료됩니다. foreground daemon이 필요할 때만 `marumesh run`을 사용하고, 상세 진단 로그가 필요할 때는 `marumesh up --debug`를 사용합니다.
 `tun` 모드에서는 `up`이 종료되기 전에 할당된 virtual IP를 OS 인터페이스에 설정합니다. macOS에서는 `ifconfig`에 `utunN` 형태로 표시됩니다.
 기본 virtual IP 할당 대역은 `100.64.0.0/24`입니다. 기존 네트워크와 겹치면 control plane의 `MARUMESH_VIRTUAL_CIDR`로 변경할 수 있습니다.
-MaruMesh는 `.maru` zone용 MagicDNS를 내장하고 short name은 hosts fallback으로 보강합니다. agent가 OS resolver 또는 hosts 권한을 확보하면 peer 이름은 `dev`, `dev.maru`, `<device-id>.maru` 형태로 로컬에서 해석됩니다.
+MaruMesh는 `.maru` zone용 MagicDNS를 내장하고 short name은 hosts fallback으로 보강합니다. agent가 OS resolver 또는 hosts 권한을 확보하면 peer 이름은 `dev`, `dev.maru`, `<device-id>.maru` 형태로 로컬에서 해석됩니다. Device 이름은 DNS 정규화 기준으로 owner별 유일해야 하므로 같은 owner가 `Dev Mac`과 `dev-mac`을 동시에 등록할 수 없습니다.
 macOS에서 `marumesh up`은 기본적으로 menubar tray를 표시합니다. Tray 없이 실행하려면 `--headless`를 사용합니다. Linux는 기본 headless이며, Windows는 desktop service/session에서 tray menu를 사용합니다.
 
 로컬 agent API를 통해 원격 device의 TCP 서비스에 연결할 때:
