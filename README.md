@@ -142,7 +142,7 @@ Use `--control https://mesh.example.com` only when connecting to a different con
 `marumesh up` starts the secure channel in the background and returns. Use `marumesh run` only when you want a foreground daemon process, or `marumesh up --debug` when you need detailed foreground diagnostics.
 In `tun` mode, the virtual interface is configured with the assigned virtual IP before `up` returns. On macOS the interface appears as `utunN` in `ifconfig`.
 The default virtual IP allocation range is `100.64.0.0/24`. Operators can change it with `MARUMESH_VIRTUAL_CIDR` on the control plane when it overlaps an existing network.
-Peer names are published locally as `dev`, `dev.maru`, and `<device-id>.maru` when the agent can update DNS/hosts entries.
+MaruMesh includes MagicDNS for the `.maru` zone and a hosts fallback for short names. Peer names are published locally as `dev`, `dev.maru`, and `<device-id>.maru` when the agent has OS resolver or hosts permissions.
 On macOS, `marumesh up` shows the menubar tray by default. Use `--headless` to run without the tray. Linux defaults to headless mode. Windows uses a tray menu when the desktop service/session supports it.
 
 Create a local TCP proxy to a remote device service:

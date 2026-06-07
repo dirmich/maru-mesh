@@ -18,8 +18,9 @@
 - **SSO 기반 device 등록 보강**: `marumesh up` 로그인 URL에 기기 이름을 포함하고, Google SSO 사용자와 hostname을 device에 저장합니다.
 - **Virtual IP 대역 설정**: 기본 device 가상 IP 대역은 `100.64.0.0/24`이며, `MARUMESH_VIRTUAL_CIDR`로 운영 환경의 기존 대역과 겹치지 않게 변경할 수 있습니다.
 - **Device 이름 보존**: 기존 device 재등록 시 hostname을 자동 덮어쓰지 않고, 이름 변경은 dashboard/API 수정 경로로만 수행합니다.
-- **Peer 이름 해석**: peer hostname을 DNS/hosts에 반영해 `dev`, `dev.maru`, `<device-id>.maru` 형태의 이름 접근을 지원합니다.
+- **내장 MagicDNS**: `.maru` zone을 agent 내장 DNS resolver로 처리하고, short name은 hosts fallback으로 보강해 `dev`, `dev.maru`, `<device-id>.maru` 형태의 이름 접근을 지원합니다.
 - **Tailscale 비교 문서**: `docs/vs_tailscale.md`에 MaruMesh 목표 UX와 Tailscale의 같은 점/다른 점을 정리했습니다.
+- **Tailscale parity backlog**: `docs/tailscale_parity.md`에 완전 대체를 위한 기능 목록과 구현 우선순위를 정리했습니다.
 - **up 기본 control URL 고정**: 기존 config에 localhost가 남아 있어도 `marumesh up`은 `--control`이 없으면 공식 기본 서버를 사용합니다.
 - **up 로그 quiet 기본값**: `marumesh up`은 기본적으로 내부 JSON 로그를 숨기고, `--debug`에서만 상세 진단 로그를 출력합니다.
 - **up 백그라운드 실행**: `marumesh up` 기본 실행은 로그인 후 `run` daemon을 백그라운드로 시작하고 반환하며, `down`은 로컬 API shutdown으로 해당 프로세스를 중지합니다.

@@ -69,7 +69,7 @@ marumesh up
 `tun` 모드에서 정상 연결되면 OS 인터페이스에 virtual IP가 설정됩니다. macOS에서는 `ifconfig`에서 `utunN` 인터페이스로 확인합니다.
 Linux `tun` 모드에서는 로그인/등록 전에 TUN 권한을 먼저 점검합니다. 일반 사용자로 실행해 `/dev/net/tun` 또는 `CAP_NET_ADMIN` 권한이 없으면 device 등록을 진행하지 않고 `sudo marumesh up` 또는 `sudo systemctl start marumesh` 사용을 안내합니다.
 기본 virtual IP 대역은 control plane의 `MARUMESH_VIRTUAL_CIDR`에서 정하며 기본값은 `100.64.0.0/24`입니다. 기존 네트워크와 겹치면 control plane에서 이 값을 변경한 뒤 새 device를 등록하세요.
-peer 이름은 discovery 후 `dev`, `dev.maru`, `<device-id>.maru` 형태로 로컬 DNS/hosts에 반영됩니다. hosts file 쓰기 권한이 없는 환경에서는 이름 해석이 제한될 수 있습니다.
+peer 이름은 discovery 후 `dev`, `dev.maru`, `<device-id>.maru` 형태로 내장 MagicDNS와 hosts fallback에 반영됩니다. `.maru` 이름은 OS resolver가 MaruMesh DNS로 보내고, short name은 hosts fallback으로 보강합니다. OS resolver/hosts 권한이 없는 환경에서는 이름 해석이 제한될 수 있습니다.
 
 ### `marumesh down`
 
