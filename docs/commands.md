@@ -67,6 +67,7 @@ marumesh up
 - `--debug`: 내부 등록, license, DNS, TUN 초기화 로그를 JSON 형식으로 자세히 출력합니다. 이 모드에서는 foreground로 실행되어 직접 `Ctrl-C`로 종료합니다.
 
 `tun` 모드에서 정상 연결되면 OS 인터페이스에 virtual IP가 설정됩니다. macOS에서는 `ifconfig`에서 `utunN` 인터페이스로 확인합니다.
+Linux `tun` 모드에서는 로그인/등록 전에 TUN 권한을 먼저 점검합니다. 일반 사용자로 실행해 `/dev/net/tun` 또는 `CAP_NET_ADMIN` 권한이 없으면 device 등록을 진행하지 않고 `sudo marumesh up` 또는 `sudo systemctl start marumesh` 사용을 안내합니다.
 기본 virtual IP 대역은 control plane의 `MARUMESH_VIRTUAL_CIDR`에서 정하며 기본값은 `100.64.0.0/24`입니다. 기존 네트워크와 겹치면 control plane에서 이 값을 변경한 뒤 새 device를 등록하세요.
 peer 이름은 discovery 후 `dev`, `dev.maru`, `<device-id>.maru` 형태로 로컬 DNS/hosts에 반영됩니다. hosts file 쓰기 권한이 없는 환경에서는 이름 해석이 제한될 수 있습니다.
 
@@ -77,6 +78,8 @@ peer 이름은 discovery 후 `dev`, `dev.maru`, `<device-id>.maru` 형태로 로
 ```bash
 marumesh down
 ```
+
+`down`은 먼저 로컬 agent API shutdown을 시도하고, 실패하면 OS service 중지를 시도합니다. Linux systemd service 중지가 권한 때문에 실패하면 `sudo marumesh down` 또는 `sudo systemctl stop marumesh`를 사용하세요.
 
 ### `marumesh install-service`
 
