@@ -37,10 +37,16 @@ else
 fi
 
 chmod +x "$tmp"
-if [ "$(id -u)" -eq 0 ]; then
-  mkdir -p "$INSTALL_DIR"
-  install -m 0755 "$tmp" "$INSTALL_DIR/marumesh"
+if mkdir -p "$INSTALL_DIR" 2>/dev/null && install -m 0755 "$tmp" "$INSTALL_DIR/marumesh" 2>/dev/null; then
+  :
+elif [ "$(id -u)" -eq 0 ]; then
+  echo "Failed to install to $INSTALL_DIR" >&2
+  exit 1
 else
+  if ! command -v sudo >/dev/null 2>&1; then
+    echo "Permission denied for $INSTALL_DIR and sudo is not available" >&2
+    exit 1
+  fi
   sudo mkdir -p "$INSTALL_DIR"
   sudo install -m 0755 "$tmp" "$INSTALL_DIR/marumesh"
 fi
