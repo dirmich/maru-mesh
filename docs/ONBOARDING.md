@@ -127,8 +127,10 @@ source repo에서 수정, 검증, commit이 끝나면 다음을 실행합니다.
 빠른 문서 동기화만 필요할 때:
 
 ```bash
-./publish.sh --skip-tests --skip-build
+./publish.sh --docs-only
 ```
+
+일반 publish는 release 업로드 전에 항상 `make release-assets`로 바이너리를 새로 만듭니다. `--docs-only`는 문서만 public repo에 동기화하고 release upload를 수행하지 않습니다.
 
 실행 전 확인:
 

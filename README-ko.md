@@ -51,7 +51,7 @@ Windows 서버 바이너리는 `bin/windows-amd64/marumesh-server.exe`에 생성
 
 ```bash
 PUBLIC_REPO=dirmich/maru-mesh PUBLIC_REPO_DIR=../marumesh-pub ./publish.sh
-./publish.sh --skip-tests --skip-build
+./publish.sh --docs-only
 ./publish.sh --dry-run
 ```
 

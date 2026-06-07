@@ -196,11 +196,13 @@ C:\MaruMesh\marumesh.exe uninstall-service
 
 다국어 README는 최상위 `README*.md` 패턴으로 처리합니다. 예를 들어 `README-ja.md`, `README-zh.md`를 추가하면 별도 스크립트 수정 없이 public repo로 복사됩니다.
 
+일반 publish는 release 업로드 전에 항상 `make release-assets`로 바이너리를 새로 만듭니다. 문서만 public repo에 동기화해야 할 때는 `--docs-only`를 사용하며, 이 모드에서는 release asset을 업로드하지 않습니다.
+
 자주 쓰는 옵션:
 
 ```bash
 ./publish.sh --dry-run
-./publish.sh --skip-tests --skip-build
+./publish.sh --docs-only
 ./publish.sh --public-repo dirmich/maru-mesh --public-dir ../marumesh-pub
 ```
 

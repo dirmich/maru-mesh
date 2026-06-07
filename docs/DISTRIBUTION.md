@@ -46,7 +46,7 @@ cd marumesh
 
 ```bash
 PUBLIC_REPO=dirmich/maru-mesh PUBLIC_REPO_DIR=../marumesh-pub ./publish.sh
-./publish.sh --skip-tests --skip-build
+./publish.sh --docs-only
 ./publish.sh --dry-run
 ```
 
