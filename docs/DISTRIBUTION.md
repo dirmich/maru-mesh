@@ -7,14 +7,14 @@
 설치 후 `marumesh check`를 실행하면 TUN 생성 가능 여부와 OS별 조치 힌트를 확인할 수 있습니다.
 현재 지원 Mesh 모드는 `tun`이며, `userspace` 모드는 TUN 없는 fallback 구현을 위한 예약 값입니다.
 
-공식 테스트 control plane은 `https://marumesh.lab.highmaru.com`입니다. HAProxy가 Docker의 `cp-server:8080`으로 연결되면 다음 client install URL을 바로 사용할 수 있습니다.
+공식 테스트 control plane은 `https://marumesh.lab.highmaru.com`입니다. client 설치 스크립트는 public repo raw URL을 공식 진입점으로 사용합니다.
 
 ```bash
-curl -fsSL https://marumesh.lab.highmaru.com/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/dirmich/maru-mesh/main/install.sh | sh
 ```
 
 ```powershell
-iwr https://marumesh.lab.highmaru.com/install.ps1 -UseB | iex
+iwr https://raw.githubusercontent.com/dirmich/maru-mesh/main/install.ps1 -UseB | iex
 ```
 
 ## 펭귄 (Linux & Raspberry Pi)

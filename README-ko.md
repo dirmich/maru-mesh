@@ -85,18 +85,18 @@ Linux systemd 설치 스크립트:
 Client install URL:
 
 ```bash
-curl -fsSL https://marumesh.lab.highmaru.com/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/dirmich/maru-mesh/main/install.sh | sh
 marumesh up
 ```
 
 Windows client install URL:
 
 ```powershell
-iwr https://marumesh.lab.highmaru.com/install.ps1 -UseB | iex
+iwr https://raw.githubusercontent.com/dirmich/maru-mesh/main/install.ps1 -UseB | iex
 marumesh up
 ```
 
-설치 URL은 public 배포 저장소의 GitHub Releases(`https://github.com/dirmich/maru-mesh/releases/latest/download`)에서 client 바이너리를 다운로드합니다. Release asset 이름은 `marumesh-linux-amd64`, `marumesh-linux-arm64`, `marumesh-darwin-amd64`, `marumesh-darwin-arm64`, `marumesh-windows-amd64.exe` 형식을 사용합니다.
+public 설치 스크립트는 public 배포 저장소의 GitHub Releases(`https://github.com/dirmich/maru-mesh/releases/latest/download`)에서 client 바이너리를 다운로드합니다. Release asset 이름은 `marumesh-linux-amd64`, `marumesh-linux-arm64`, `marumesh-darwin-amd64`, `marumesh-darwin-arm64`, `marumesh-windows-amd64.exe` 형식을 사용합니다.
 
 Linux 예:
 

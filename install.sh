@@ -1,0 +1,50 @@
+#!/bin/sh
+# MaruMesh client installer for Linux/macOS.
+
+set -eu
+
+CONTROL_URL="${CONTROL_URL:-https://marumesh.lab.highmaru.com}"
+GITHUB_RELEASE_BASE="${GITHUB_RELEASE_BASE:-https://github.com/dirmich/maru-mesh/releases/latest/download}"
+INSTALL_DIR="${INSTALL_DIR:-/usr/local/bin}"
+
+os="$(uname -s | tr '[:upper:]' '[:lower:]')"
+arch="$(uname -m)"
+
+case "$arch" in
+  x86_64|amd64) arch="amd64" ;;
+  arm64|aarch64) arch="arm64" ;;
+  *) echo "Unsupported architecture: $arch" >&2; exit 1 ;;
+esac
+
+case "$os" in
+  linux|darwin) ;;
+  *) echo "Unsupported OS: $os" >&2; exit 1 ;;
+esac
+
+asset="marumesh-${os}-${arch}"
+url="${GITHUB_RELEASE_BASE}/${asset}"
+tmp="$(mktemp)"
+trap 'rm -f "$tmp"' EXIT
+
+echo "Downloading ${url}"
+if command -v curl >/dev/null 2>&1; then
+  curl -fL "$url" -o "$tmp"
+elif command -v wget >/dev/null 2>&1; then
+  wget -O "$tmp" "$url"
+else
+  echo "curl or wget is required" >&2
+  exit 1
+fi
+
+chmod +x "$tmp"
+if [ "$(id -u)" -eq 0 ]; then
+  mkdir -p "$INSTALL_DIR"
+  install -m 0755 "$tmp" "$INSTALL_DIR/marumesh"
+else
+  sudo mkdir -p "$INSTALL_DIR"
+  sudo install -m 0755 "$tmp" "$INSTALL_DIR/marumesh"
+fi
+
+echo "Installed: $INSTALL_DIR/marumesh"
+echo "Control plane: $CONTROL_URL"
+echo "Next: marumesh up"

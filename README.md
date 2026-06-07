@@ -85,18 +85,18 @@ Linux systemd install script:
 Client install URL:
 
 ```bash
-curl -fsSL https://marumesh.lab.highmaru.com/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/dirmich/maru-mesh/main/install.sh | sh
 marumesh up
 ```
 
 Windows client install URL:
 
 ```powershell
-iwr https://marumesh.lab.highmaru.com/install.ps1 -UseB | iex
+iwr https://raw.githubusercontent.com/dirmich/maru-mesh/main/install.ps1 -UseB | iex
 marumesh up
 ```
 
-The install URL downloads client binaries from the public distribution repository GitHub Releases: `https://github.com/dirmich/maru-mesh/releases/latest/download`. Release assets must be named `marumesh-linux-amd64`, `marumesh-linux-arm64`, `marumesh-darwin-amd64`, `marumesh-darwin-arm64`, and `marumesh-windows-amd64.exe`.
+The public install scripts download client binaries from the public distribution repository GitHub Releases: `https://github.com/dirmich/maru-mesh/releases/latest/download`. Release assets must be named `marumesh-linux-amd64`, `marumesh-linux-arm64`, `marumesh-darwin-amd64`, `marumesh-darwin-arm64`, and `marumesh-windows-amd64.exe`.
 
 Linux:
 

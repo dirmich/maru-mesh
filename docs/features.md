@@ -10,7 +10,7 @@
 - **외부 WireGuard CLI 의존성 제거**: Docker 런타임 이미지에서 `wireguard-tools`와 `iproute2`를 제거하고 Go 내장 WireGuard 장치로 동작하도록 설치 경계를 정리했습니다.
 - **설치 사전 점검 명령 추가**: `marumesh check`로 TUN 생성 권한을 확인하고 OS별 해결 힌트를 출력하도록 했습니다.
 - **Mesh 모드 설정 추가**: 설정 파일의 `mesh_mode`와 CLI `--mesh-mode`를 추가해 현재 `tun` 모드와 향후 `userspace` fallback 모드를 명확히 분리했습니다.
-- **Client install URL**: control plane이 `/install.sh`, `/install.ps1`을 제공하고 GitHub Releases의 client 바이너리를 설치하도록 했습니다.
+- **Client install URL**: public repo raw `install.sh`, `install.ps1`을 공식 설치 진입점으로 사용하고 GitHub Releases의 client 바이너리를 설치하도록 했습니다.
 - **공식 테스트 URL 통일**: 기본 control plane과 Docker 공개 URL을 `https://marumesh.lab.highmaru.com`으로 정리했습니다.
 - **Docker env_file 정리**: Compose 서버 환경 변수는 `.env`에서 직접 읽고, `HOST_PORT`와 `PORT`를 분리했습니다.
 - **PostgreSQL DSN 파싱 보강**: database 자동 생성 fallback이 password 특수문자와 URL DSN을 처리하도록 수정했습니다.

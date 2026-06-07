@@ -19,13 +19,13 @@
 설치:
 
 ```bash
-curl -fsSL https://marumesh.lab.highmaru.com/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/dirmich/maru-mesh/main/install.sh | sh
 ```
 
 Windows:
 
 ```powershell
-iwr https://marumesh.lab.highmaru.com/install.ps1 -UseB | iex
+iwr https://raw.githubusercontent.com/dirmich/maru-mesh/main/install.ps1 -UseB | iex
 ```
 
 실행:
