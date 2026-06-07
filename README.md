@@ -45,6 +45,7 @@ After source changes are committed, run:
 ```
 
 `publish.sh` reads `VERSION` from `Makefile`, runs tests and release builds, uploads `dist/marumesh-*` assets to the public release repository, and syncs public documentation into `../marumesh-pub`. All top-level `README*.md` files are synced, so additional language files such as `README-ja.md` can be added without changing the publish flow.
+If `../marumesh-pub` is missing on a new machine, `publish.sh` clones `https://github.com/dirmich/maru-mesh.git` first.
 
 Useful overrides:
 

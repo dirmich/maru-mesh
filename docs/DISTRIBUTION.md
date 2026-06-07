@@ -25,10 +25,19 @@ iwr https://marumesh.lab.highmaru.com/install.ps1 -UseB | iex
 ./publish.sh
 ```
 
+새 기기에서 `../marumesh-pub`가 아직 없으면 먼저 public repo를 clone합니다. `publish.sh`도 경로가 없으면 자동 clone합니다.
+
+```bash
+cd ..
+git clone https://github.com/dirmich/maru-mesh.git marumesh-pub
+cd marumesh
+```
+
 기본 동작:
 
 - `Makefile`의 `VERSION`을 읽어 release tag `v<VERSION>`을 결정합니다.
 - `make test`와 `make release-assets`를 실행합니다.
+- `../marumesh-pub`가 없으면 `https://github.com/dirmich/maru-mesh.git`에서 public repo를 clone합니다.
 - `dist/marumesh-*` asset을 public GitHub Release에 생성 또는 덮어쓰기 업로드합니다.
 - 최상위 `README*.md` 파일과 `docs/`를 `../marumesh-pub`에 동기화하고 commit/push합니다.
 - `README-ko.md`, `README-ja.md`처럼 언어별 README가 추가되어도 `README*.md` 패턴으로 자동 동기화됩니다.

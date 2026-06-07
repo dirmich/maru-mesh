@@ -190,6 +190,7 @@ C:\MaruMesh\marumesh.exe uninstall-service
 - `make test`를 실행합니다.
 - `make release-assets`로 `dist/marumesh-*` client asset을 생성합니다.
 - source branch에 push되지 않은 commit이 있으면 `git push`를 수행합니다.
+- `../marumesh-pub` public repo가 없으면 `https://github.com/dirmich/maru-mesh.git`에서 자동 clone합니다.
 - `README*.md`와 `docs/`를 `../marumesh-pub`에 동기화하고 public repo에 commit/push합니다.
 - `dirmich/maru-mesh` GitHub Release를 생성하거나 기존 release asset을 `--clobber`로 갱신합니다.
 

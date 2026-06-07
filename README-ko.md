@@ -45,6 +45,7 @@ Windows 서버 바이너리는 `bin/windows-amd64/marumesh-server.exe`에 생성
 ```
 
 `publish.sh`는 `Makefile`의 `VERSION`을 읽고, 테스트와 release build를 실행한 뒤 `dist/marumesh-*` 파일을 public release 저장소에 업로드합니다. 또한 `../marumesh-pub`에 공개 문서를 동기화합니다. 최상위 `README*.md` 파일을 모두 동기화하므로, 이후 `README-ja.md` 같은 다른 언어 README를 추가해도 publish flow를 바꾸지 않아도 됩니다.
+새 기기에서 `../marumesh-pub`가 없으면 `publish.sh`가 `https://github.com/dirmich/maru-mesh.git`을 먼저 clone합니다.
 
 주요 override:
 
