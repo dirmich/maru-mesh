@@ -16,10 +16,13 @@
 - **PostgreSQL DSN 파싱 보강**: database 자동 생성 fallback이 password 특수문자와 URL DSN을 처리하도록 수정했습니다.
 - **Policy sync 오류 진단 개선**: 인증 실패 같은 plain text 응답을 JSON 파싱 오류 대신 HTTP status/body로 표시합니다.
 - **SSO 기반 device 등록 보강**: `marumesh up` 로그인 URL에 기기 이름을 포함하고, Google SSO 사용자와 hostname을 device에 저장합니다.
+- **Virtual IP 대역 설정**: 기본 device 가상 IP 대역은 `100.64.0.0/24`이며, `MARUMESH_VIRTUAL_CIDR`로 운영 환경의 기존 대역과 겹치지 않게 변경할 수 있습니다.
+- **Device 이름 보존**: 기존 device 재등록 시 hostname을 자동 덮어쓰지 않고, 이름 변경은 dashboard/API 수정 경로로만 수행합니다.
+- **Peer 이름 해석**: peer hostname을 DNS/hosts에 반영해 `dev`, `dev.maru`, `<device-id>.maru` 형태의 이름 접근을 지원합니다.
 - **up 기본 control URL 고정**: 기존 config에 localhost가 남아 있어도 `marumesh up`은 `--control`이 없으면 공식 기본 서버를 사용합니다.
 - **up 로그 quiet 기본값**: `marumesh up`은 기본적으로 내부 JSON 로그를 숨기고, `--debug`에서만 상세 진단 로그를 출력합니다.
 - **up 백그라운드 실행**: `marumesh up` 기본 실행은 로그인 후 `run` daemon을 백그라운드로 시작하고 반환하며, `down`은 로컬 API shutdown으로 해당 프로세스를 중지합니다.
-- **device 관리 보강**: 같은 device_id 재등록은 기존 device를 갱신하고, 최종 로그인 시간과 기기 이름을 대시보드에 표시하며 owner/superuser가 기기 이름을 수정할 수 있습니다.
+- **device 관리 보강**: 같은 device_id 재등록은 기존 device의 이름을 보존하고 public key/최종 로그인 시간을 갱신하며, owner/superuser가 대시보드에서 기기 이름을 수정할 수 있습니다.
 - **TUN 인터페이스 표시 보강**: macOS 기본 TUN 이름을 `utun`으로 보정하고, TUN 생성 후 virtual IP를 OS 인터페이스에 설정해 `ifconfig`/`ip addr`에서 확인할 수 있게 했습니다.
 - **WireGuard IPC key 포맷 수정**: WireGuard userspace device에는 hex key를 전달하고 control plane/API에는 기존 base64 key를 유지하도록 분리했습니다.
 - **device 삭제/재등록 flow 보강**: owner/superuser가 대시보드에서 device를 삭제할 수 있고, 삭제된 device는 다음 `marumesh up`에서 SSO device 등록 flow를 다시 수행합니다.

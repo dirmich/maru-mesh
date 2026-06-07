@@ -107,6 +107,7 @@ curl -fsSL https://raw.githubusercontent.com/dirmich/maru-mesh/main/install.sh |
   - `AUTH_CALLBACK_URL`: `https://marumesh.lab.highmaru.com/api/v1/auth/callback`
   - `PUBLIC_CONTROL_URL`: `https://marumesh.lab.highmaru.com`
   - `CLIENT_RELEASE_BASE_URL`: `https://github.com/dirmich/maru-mesh/releases/latest/download`
+  - `MARUMESH_VIRTUAL_CIDR`: MaruMesh device virtual IP allocation CIDR. 기본값은 `100.64.0.0/24`이며, 기존 사내/VPN 대역과 겹치면 다른 사설 대역으로 변경하세요.
   - `JWT_SECRET`: 대시보드/API 세션 토큰 서명용 랜덤 시크릿. 운영 환경에서는 반드시 설정해야 합니다.
 
 로컬 개발에서만 임시 시크릿을 허용하려면 `MARUMESH_DEV_INSECURE_JWT=true`를 사용할 수 있습니다. 운영 배포에는 사용하지 마세요.

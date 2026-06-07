@@ -10,7 +10,7 @@
 - 로그인 정보가 없으면 `up`이 기기 이름을 포함한 SSO 로그인 URL을 출력하고, Google SSO 로그인 후 토큰을 config에 저장합니다.
 - SSO 완료 후 device는 로그인한 사용자와 기기 이름으로 control plane에 등록됩니다.
 - 로그인 정보가 있으면 저장된 토큰으로 로그인하고 보안 채널을 백그라운드로 연결한 뒤 명령은 종료됩니다.
-- 같은 device_id가 다시 등록되면 새 device가 중복 생성되지 않고 기존 device의 기기 이름, public key, 최종 로그인 시간이 갱신됩니다.
+- 같은 device_id가 다시 등록되면 새 device가 중복 생성되지 않고 기존 device의 이름은 유지하며 public key와 최종 로그인 시간이 갱신됩니다.
 - 대시보드에서 device가 삭제된 경우 다음 `marumesh up`은 저장 토큰만 재사용하지 않고 SSO device 등록 flow를 다시 진행합니다.
 - Windows에서는 `up`이 로그인 후 같은 config 경로를 서비스 실행에 넘겨 Windows Service를 설치/시작합니다.
 
@@ -67,6 +67,8 @@ marumesh up
 - `--debug`: 내부 등록, license, DNS, TUN 초기화 로그를 JSON 형식으로 자세히 출력합니다. 이 모드에서는 foreground로 실행되어 직접 `Ctrl-C`로 종료합니다.
 
 `tun` 모드에서 정상 연결되면 OS 인터페이스에 virtual IP가 설정됩니다. macOS에서는 `ifconfig`에서 `utunN` 인터페이스로 확인합니다.
+기본 virtual IP 대역은 control plane의 `MARUMESH_VIRTUAL_CIDR`에서 정하며 기본값은 `100.64.0.0/24`입니다. 기존 네트워크와 겹치면 control plane에서 이 값을 변경한 뒤 새 device를 등록하세요.
+peer 이름은 discovery 후 `dev`, `dev.maru`, `<device-id>.maru` 형태로 로컬 DNS/hosts에 반영됩니다. hosts file 쓰기 권한이 없는 환경에서는 이름 해석이 제한될 수 있습니다.
 
 ### `marumesh down`
 
