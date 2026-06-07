@@ -175,39 +175,3 @@ C:\MaruMesh\marumesh.exe up
 C:\MaruMesh\marumesh.exe down
 C:\MaruMesh\marumesh.exe uninstall-service
 ```
-
-## 배포 운영 명령
-
-소스 수정과 커밋이 끝난 뒤 public 문서 저장소와 GitHub Release를 갱신할 때는 source repo 루트에서 `publish.sh`를 실행합니다.
-
-```bash
-./publish.sh
-```
-
-기본 동작:
-
-- `Makefile`의 `VERSION`을 읽어 release tag `v<VERSION>`을 사용합니다.
-- `make test`를 실행합니다.
-- `make release-assets`로 `dist/marumesh-*` client asset을 생성합니다.
-- source branch에 push되지 않은 commit이 있으면 `git push`를 수행합니다.
-- `../marumesh-pub` public repo가 없으면 `https://github.com/dirmich/maru-mesh.git`에서 자동 clone합니다.
-- `README*.md`와 `docs/`를 `../marumesh-pub`에 동기화하고 public repo에 commit/push합니다.
-- `dirmich/maru-mesh` GitHub Release를 생성하거나 기존 release asset을 `--clobber`로 갱신합니다.
-
-다국어 README는 최상위 `README*.md` 패턴으로 처리합니다. 예를 들어 `README-ja.md`, `README-zh.md`를 추가하면 별도 스크립트 수정 없이 public repo로 복사됩니다.
-
-일반 publish는 release 업로드 전에 항상 `make release-assets`로 바이너리를 새로 만듭니다. 문서만 public repo에 동기화해야 할 때는 `--docs-only`를 사용하며, 이 모드에서는 release asset을 업로드하지 않습니다.
-
-자주 쓰는 옵션:
-
-```bash
-./publish.sh --dry-run
-./publish.sh --docs-only
-./publish.sh --public-repo dirmich/maru-mesh --public-dir ../marumesh-pub
-```
-
-환경 변수로도 같은 값을 지정할 수 있습니다.
-
-```bash
-PUBLIC_REPO=dirmich/maru-mesh PUBLIC_REPO_DIR=../marumesh-pub ./publish.sh
-```

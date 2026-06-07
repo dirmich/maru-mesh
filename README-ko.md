@@ -36,25 +36,6 @@ make release-assets
 
 Windows 서버 바이너리는 `bin/windows-amd64/marumesh-server.exe`에 생성됩니다. `make release-assets`는 GitHub Release 업로드용 파일을 `dist/` 아래에 생성합니다. macOS 빌드는 systray 제약 때문에 macOS 호스트에서 native arch로 생성합니다. Intel Mac은 `darwin-amd64`, Apple Silicon(M1/M2/M3/M4)은 `darwin-arm64`입니다.
 
-## Publish
-
-소스 변경을 커밋한 뒤 다음 명령으로 공개 문서와 GitHub Release를 갱신합니다.
-
-```bash
-./publish.sh
-```
-
-`publish.sh`는 `Makefile`의 `VERSION`을 읽고, 테스트와 release build를 실행한 뒤 `dist/marumesh-*` 파일을 public release 저장소에 업로드합니다. 또한 `../marumesh-pub`에 공개 문서를 동기화합니다. 최상위 `README*.md` 파일을 모두 동기화하므로, 이후 `README-ja.md` 같은 다른 언어 README를 추가해도 publish flow를 바꾸지 않아도 됩니다.
-새 기기에서 `../marumesh-pub`가 없으면 `publish.sh`가 `https://github.com/dirmich/maru-mesh.git`을 먼저 clone합니다.
-
-주요 override:
-
-```bash
-PUBLIC_REPO=dirmich/maru-mesh PUBLIC_REPO_DIR=../marumesh-pub ./publish.sh
-./publish.sh --docs-only
-./publish.sh --dry-run
-```
-
 ## 검증
 
 ```bash
@@ -189,5 +170,4 @@ JWT_SECRET=...
 - `frontend`: React 대시보드 소스
 - `docs`: PRD, 설치 가이드, 기능 문서
 
-새로운 기기나 세션에서 작업을 시작할 때는 [docs/ONBOARDING.md](docs/ONBOARDING.md)를 먼저 읽으세요.
 더 자세한 명령어는 [docs/commands.md](docs/commands.md), 배포 방법은 [docs/install_guide.md](docs/install_guide.md)와 [docs/DISTRIBUTION.md](docs/DISTRIBUTION.md)를 참고하세요.
