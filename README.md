@@ -114,6 +114,8 @@ marumesh up
 marumesh down
 ```
 
+For a double-clickable macOS installer from GitHub Releases, use the Developer ID notarized package named `MaruMesh-<version>-darwin-<arch>.pkg`. The `*-appstore.pkg` asset is only for App Store Connect upload and is not the direct-download installer.
+
 macOS Apple Silicon (M1/M2/M3/M4):
 
 ```bash

@@ -114,6 +114,8 @@ marumesh up
 marumesh down
 ```
 
+GitHub Release에서 더블클릭 설치하려면 Developer ID로 서명/공증된 `MaruMesh-<version>-darwin-<arch>.pkg`를 사용합니다. `*-appstore.pkg`는 App Store Connect 업로드용이며 직접 다운로드 설치용이 아닙니다.
+
 macOS Apple Silicon(M1/M2/M3/M4):
 
 ```bash
