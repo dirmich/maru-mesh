@@ -13,6 +13,7 @@
 - 같은 device_id가 다시 등록되면 새 device가 중복 생성되지 않고 기존 device의 이름은 유지하며 public key와 최종 로그인 시간이 갱신됩니다.
 - 대시보드에서 device가 삭제된 경우 다음 `marumesh up`은 저장 토큰만 재사용하지 않고 SSO device 등록 flow를 다시 진행합니다.
 - Windows에서는 `up`이 로그인 후 같은 config 경로를 서비스 실행에 넘겨 Windows Service를 설치/시작합니다.
+- local agent API socket은 기본적으로 `~/.marumesh/marumesh.sock`을 사용합니다. 예전 `/tmp/marumesh.sock`이 root 소유로 남아 있어도 일반 사용자 실행과 충돌하지 않게 하기 위한 기본값입니다.
 
 ## 빠른 시작
 

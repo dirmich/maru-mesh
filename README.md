@@ -114,8 +114,6 @@ marumesh up
 marumesh down
 ```
 
-For a double-clickable macOS installer from GitHub Releases, use the Developer ID notarized package named `MaruMesh-<version>-darwin-<arch>.pkg`. The `*-appstore.pkg` asset is only for App Store Connect upload and is not the direct-download installer.
-
 macOS Apple Silicon (M1/M2/M3/M4):
 
 ```bash
@@ -153,6 +151,7 @@ In `tun` mode, the virtual interface is configured with the assigned virtual IP 
 The default virtual IP allocation range is `100.64.0.0/24`. Operators can change it with `MARUMESH_VIRTUAL_CIDR` on the control plane when it overlaps an existing network.
 MaruMesh includes MagicDNS for the `.maru` zone and a hosts fallback for short names. Peer names are published locally as `dev`, `dev.maru`, and `<device-id>.maru` when the agent has OS resolver or hosts permissions. Device names are unique per owner after DNS normalization, so `Dev Mac` and `dev-mac` cannot be registered for the same owner.
 On macOS, `marumesh up` shows the menubar tray by default. Use `--headless` to run without the tray. Linux defaults to headless mode. Windows uses a tray menu when the desktop service/session supports it.
+The local agent API socket defaults to `~/.marumesh/marumesh.sock`, avoiding stale root-owned `/tmp/marumesh.sock` conflicts from earlier test runs.
 
 Create a local TCP proxy to a remote device service:
 
