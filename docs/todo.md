@@ -1,6 +1,11 @@
 # MaruMesh 작업 목록 (TODO)
 
 ## 완료된 작업
+- [x] **중앙 에이전트 버전 정책 및 자동 upgrade/downgrade**
+    - [x] 목표/최소 버전, 플랫폼별 검증 산출물 API와 장치 상태 기록
+    - [x] SHA-256 검증, 원자적 교체, 이전 바이너리 보관 및 자동 재시작
+    - [x] 최소 버전 미달 시 데이터 플레인 차단과 관리 전용 재시도
+    - [x] 대시보드 에이전트 버전 및 업데이트 상태 배지
 - [x] **프로젝트 초기화**
 - [x] **에이전트 핵심 구현**
 - [x] **보안 및 Identity**
@@ -28,6 +33,14 @@
 - 서비스 제공자 및 사용자를 위한 엔드-투-엔드(E2E) 운영 체계 구축 완료.
 
 ## 향후 계획
+- [ ] **OpenSSH 실기기 E2E 검증**
+    - [x] 장치별 Ed25519 키 생성·Control Plane 공개키 등록 구현
+    - [x] `marumesh up --ssh`, `marumesh ssh on/off/status/refresh` 구현
+    - [x] 접속 시점 `AuthorizedKeysCommand` 정책 인가와 root 별도 정책 구현
+    - [x] 대시보드 SSH 활성 배지 구현
+    - [x] v0.11.74 CLI GitHub Release 및 control plane Docker 이미지 배포
+    - [ ] Linux 대상에서 `ssh <user>@<device>.maru` 실제 접속 확인
+    - [ ] `ssh off` 직후 신규 접속 차단과 기존 OpenSSH 인증 방식 유지 확인
 - [ ] **v0.11.72 실기기 E2E 검증 완료**
     - [x] 중앙 서버, EC2 Linux 에이전트, macOS 에이전트를 모두 v0.11.72로 업그레이드하고 재시작
     - [x] 양쪽 peer 상태가 `Connected`인지 확인
@@ -36,19 +49,24 @@
     - [ ] 양방향 TCP/UDP 애플리케이션 트래픽 통신 확인
     - [x] 한쪽 에이전트를 재시작해 15초 응답 타임아웃과 자동 재연결이 정상 동작하는지 확인
     - [ ] 연결을 10분 이상 유지해 ICE가 불필요하게 `Disconnected`/`Failed`로 전환되지 않는지 확인
-- [ ] **ICE/WireGuard 연결 수명주기 정리**
-    - [ ] ICE 세션 교체 중 WireGuard가 닫힌 이전 endpoint에 패킷을 보내는 `the agent is closed` 오류 제거
-    - [ ] 재연결 완료 시 기존 WireGuard peer와 `ICEBind` 연결이 원자적으로 교체되는지 회귀 테스트 추가
-    - [ ] responder가 전달받은 `allowed_ips`를 실제 WireGuard IPC 설정에 반영하는 통합 테스트 추가
-- [ ] **시그널링 신뢰성 보강**
-    - [ ] `SendSignal`과 `ReceiveSignals`에서 HTTP 비정상 상태 코드를 오류로 처리
-    - [ ] 요청/응답 유실, 상대 재시작, 중복 시그널을 포함하는 자동화된 2-node E2E 테스트 추가
-- [ ] **DNS 및 로컬 운영 권한 정리**
-    - [ ] Linux/macOS의 UDP 5353 충돌 원인을 제거하거나 MagicDNS와 ICE mDNS 포트를 분리
-    - [ ] `policies.json`이 없을 때의 초기 정책 동기화 경고 처리 개선
-    - [ ] macOS에서 root로 실행된 에이전트의 Unix socket을 일반 사용자 CLI가 안전하게 조회할 수 있도록 권한/소유권 정리
+- [x] **ICE/WireGuard 연결 수명주기 정리**
+    - [x] WireGuard bind 재설정과 영구 종료를 분리해 이전 endpoint 오류 제거
+    - [x] 교체 세션 보호 및 `ICEBind` 재개 회귀 테스트 추가
+    - [x] responder의 `allowed_ips`를 WireGuard IPC 설정에 반영
+- [x] **시그널링 신뢰성 보강**
+    - [x] `SendSignal`과 `ReceiveSignals`에서 HTTP 비정상 상태 코드를 오류로 처리
+    - [x] 요청 타임아웃, 상대 재시작 세션 교체, 중복 세션 보호 테스트 추가
+- [x] **DNS 및 로컬 운영 권한 정리**
+    - [x] ICE mDNS를 비활성화해 MagicDNS UDP 5353 충돌 제거
+    - [x] `policies.json`이 없는 정상 초기 상태에서는 경고를 생략
+    - [x] root 에이전트의 Unix socket을 일반 사용자 CLI가 조회할 수 있도록 `0666` 적용
 - [ ] **배포 패키지 보완**
-    - [ ] macOS arm64 릴리스 바이너리 추가
-    - [ ] macOS Developer ID 서명 및 notarization을 적용한 정식 배포 경로 구성
-    - [ ] Docker 멀티아키텍처 builder를 구성하고 `linux/amd64`, `linux/arm64` 이미지를 함께 배포
+    - [x] macOS arm64 네이티브 릴리스 빌드 경로 추가
+    - [x] macOS Developer ID 서명 및 notarization 패키징 경로 구성 (실제 서명은 운영 자격증명 필요)
+    - [x] Docker buildx 기반 `linux/amd64`, `linux/arm64` 동시 배포 타깃 추가
+    - [x] Docker build/push 및 manifest 검증 자동화 스크립트 추가
+    - [x] BuildKit 대상 아키텍처를 보존하는 네이티브 교차 컴파일 경로 적용
+    - [x] 공식 이미지 배포 대상을 Docker Hub `dirmich/marumesh`로 확정
+    - [ ] Windows SCM 환경에서 실행 중 EXE rename 기반 supervised 자동 업데이트 E2E 검증
+    - [x] `0.11.74`, `latest` 멀티아키텍처 이미지 push 및 manifest 검증 (`sha256:c613e3fe378f6326afdb53645e0674296334bc622a5d44138e9c599c18e67483`)
 - [ ] 정식 버전 1.0 릴리즈 패키징
