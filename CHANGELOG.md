@@ -4,6 +4,13 @@
 
 ## [Unreleased]
 
+## [0.11.88] - 2026-09-18
+### Fixed
+- **에이전트 단독 선행 업그레이드 시 'update failed' 오류 및 불필요한 다운그레이드 루프 해소**:
+  - 에이전트 업데이트 정책(`update.Policy.Decide`)에서 에이전트 버전이 서버의 권장(Desired) 버전보다 높을 경우(`current > desired`), 기본적으로 업데이트 불필요(`UpdateRequired = false`) 및 최신 상태(`current`)로 처리하도록 개선.
+  - 관리자가 의도적으로 환경변수(`ALLOW_AGENT_DOWNGRADE=true`)를 부여하지 않는 한, 최신 에이전트가 구버전 서버에 연결될 때 구버전으로의 자동 다운그레이드를 강제하거나 다운그레이드 실패로 인한 `update failed` 에러를 방지.
+  - 서버 및 대시보드 상태가 정상 `current`로 유지되도록 보장.
+
 ## [0.11.87] - 2026-09-18
 ### Fixed
 - **동일 사용자 소유 기기 간 무암호 OpenSSH 직결 보장**:
