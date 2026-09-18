@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+## [0.11.89] - 2026-09-18
+### Fixed
+- **OpenSSH 무암호 직결 인증 파이프라인 결함 수정**:
+  - `sshd` 동적 설정(`90-marumesh.conf`)의 `AuthorizedKeysCommand`를 올바른 서브커맨드(`ssh authorized-keys --config %s --user %u --key-type %t --key %k`)로 교정하고, 최상위 `marumesh ssh-auth` 호환 커맨드를 추가하여 sshd 키 검증 실패 및 비밀번호 입력 창으로 떨어지던 문제 해결.
+  - 서버의 `sshPolicyAllows`에서 동일 소유자(Same Owner) 기기간 접속 시 root 계정 접속(`action == "ssh:root"`)도 기본 허용(`same-owner`)하도록 개선하여, `sudo ssh <peer>` 및 `ssh <peer>` 모두 비밀번호 없이 즉시 접속 보장.
+  - 에이전트 데몬 구동 시 시스템의 일반 사용자(`/home/*`)를 탐색하여 `~/.ssh/config` 및 `~/.ssh/marumesh/id_ed25519` 키페어를 자동 위임 배포하여, 일반 터미널 환경에서도 `ssh <기기명>` 즉시 직결 지원.
+  - `id_ed25519.previous` 파일이 실제로 존재할 때만 `~/.ssh/config`에 `IdentityFile`을 추가하도록 수정하여 `no such identity` 경고 제거.
+
 ## [0.11.88] - 2026-09-18
 ### Fixed
 - **에이전트 단독 선행 업그레이드 시 'update failed' 오류 및 불필요한 다운그레이드 루프 해소**:
