@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.11.87] - 2026-09-18
+### Fixed
+- **동일 사용자 소유 기기 간 무암호 OpenSSH 직결 보장**:
+  - Control Plane의 SSH 정책 인가(`sshPolicyAllows`)에서 동일 소유자(`source.OwnerID == target.OwnerID`)의 일반 사용자 접속(`action != "ssh:root"`)을 기본 허용(`same-owner`)하도록 개선. 별도 정책 등록이나 추가 옵션 없이 `ssh <장치명>`만으로 즉시 연결됩니다. (root 로그인은 보안상 명시적 정책 유지)
+  - Agent의 10초 피어 디스커버리 루프에서 `/etc/hosts`뿐만 아니라 `~/.ssh/config`의 Host 목록(`*.maru`, `10.77.0.*`, 모든 피어의 hostname)도 실시간 자동 동기화하도록 구현.
+
 ## [0.11.86] - 2026-09-18
 ### Added
 - **웹 대시보드 원격 에이전트 제어 기능**:

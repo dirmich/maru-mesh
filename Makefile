@@ -11,7 +11,7 @@ HOST_ARCH?=$(shell go env GOARCH)
 HOST_EXT=$(if $(filter windows,$(HOST_OS)),.exe,)
 HOST_PLATFORM=$(HOST_OS)-$(HOST_ARCH)
 
-VERSION=0.11.86
+VERSION=0.11.87
 DOCKER_IMAGE?=dirmich/marumesh
 LDFLAGS=-ldflags "-X main.Version=$(VERSION)"
 
